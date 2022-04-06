@@ -1,5 +1,5 @@
-import React, { useState } from 'react';
-import { Text, View, StyleSheet, Dimensions } from 'react-native';
+import React from 'react';
+import { Text, View, StyleSheet, Dimensions, TouchableWithoutFeedback } from 'react-native';
 import BouncyCheckbox from "react-native-bouncy-checkbox";
 
 interface Types {
@@ -7,30 +7,38 @@ interface Types {
     text: string,
 }
 
-const Task = ({id, text } : Types)  => {
+const Task = ({ id, text }: Types) => {
+    let bouncyCheckboxRef: BouncyCheckbox | null = null;
     const [checked, setChecked] = React.useState(false);
-    
 
-    console.log(text);
+    const taskPressed = () => {
+        setChecked(!checked)
+        bouncyCheckboxRef?.onPress()
+    }
+
     return (
-        <View style={styles.container} >
-             <BouncyCheckbox 
-             onPress={(setChecked: boolean) => {}} 
-             fillColor="blue"
-             iconStyle={{borderColor: 'gray'}}
-             />
-    
-            <Text>{text}</Text>
-        </View>
+        <TouchableWithoutFeedback onPress={taskPressed}>
+            <View style={styles.container} >
+                <BouncyCheckbox
+                    ref={(ref: any) => (bouncyCheckboxRef = ref)}
+                    isChecked={checked}
+                    fillColor="blue"
+                    iconStyle={{ borderColor: 'gray' }}
+                />
+                <Text>{text}</Text>
+            </View>
+        </TouchableWithoutFeedback>
     )
 };
 
+
+
 export default Task;
 
-const styles = StyleSheet.create ({
-    container:{
-        width: (Dimensions.get('window').width) -20,
-        
+const styles = StyleSheet.create({
+    container: {
+        width: (Dimensions.get('window').width) - 20,
+
         display: 'flex',
         flexDirection: 'row',
         alignItems: 'center',
