@@ -8,14 +8,19 @@ import { SafeAreaView } from 'react-native-safe-area-context';
 const TaskScreen = () => {
     const image = { uri: 'assets/SpaceBackground.jpg' };
 
-    
+    const [filter, setFiter] = React.useState('All')
+
+    const onFilterChanged = (filterName) => {
+        setFiter(filterName)
+    }
 
     return (
         <ImageBackground source={require('../assets/SpaceBackground2.jpg')} resizeMode="cover" style={styles.image}>
             <SafeAreaView style={styles.container}>
                 <Text style={styles.header}>Missions</Text>
                 <SearchBar />
-                <TaskFilters />
+                <TaskFilters filter={filter} onFilterChanged={onFilterChanged} />
+                <TaskList filter={filter}/>
             </SafeAreaView>
 
         </ImageBackground>

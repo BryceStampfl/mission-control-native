@@ -1,36 +1,15 @@
 import React from 'react';
 
 import { StyleSheet, View, Text, TouchableNativeFeedback, Dimensions, FlatList } from 'react-native';
+import { filterData } from '../utils/Data';
 
-
-const TaskFilters = () => {
-
-    const [filter, setFiter] = React.useState('All')
-
-    const onFilterChanged = (filterName) => {
-        setFiter(filterName)
-    }
-
-    const filterHeaders = [
-        {
-            title: 'All',
-            key: 1,
-        },
-        {
-            title: 'Active',
-            key: 2,
-        },
-        {
-            title: 'Completed',
-            key: 3,
-        }]
-
+const TaskFilters = ({filter, onFilterChanged}) => {
 
     return (
         <View style={styles.container}>
             <FlatList
                 horizontal={true}
-                data={filterHeaders}
+                data={filterData}
                 renderItem={({ item }) => (
                     <Filter
                         title={item.title}
@@ -60,6 +39,8 @@ const styles = StyleSheet.create({
         width: (Dimensions.get('window').width) - 20,
         height: 40,
         backgroundColor: 'lightgray',
+
+        marginBottom: 5,
 
         borderRadius: 7,
         borderWidth: 1,
