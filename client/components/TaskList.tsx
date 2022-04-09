@@ -1,51 +1,37 @@
 import React from 'react';
-import { FlatList, View, StyleSheet } from 'react-native'
+import { FlatList, View } from 'react-native'
 import Task from './Task';
 
-const TaskList = () => {
+import { missionData } from '../utils/Data.js';
 
-    const dataArray = [
-        {
-            id: 1,
-            text: 'Mission One'
-        },
-        {
-            id: 2,
-            text: 'Mission Two'
-        },
-        {
-            id: 3,
-            text: 'Mission Three'
-        },
-        {
-            id: 4,
-            text: 'Mission Four'
-        },
-        {
-            id: 5,
-            text: 'Mission Five'
-        },
-        {
-            id: 6,
-            text: 'Mission Six'
-        },];
+const TaskList = ({ filter }) => {
+    console.log('Filter is ' + filter)
+
+    const handlePress = (id: number) => {
+        missionData.map((element) => {
+            if (element.id == id) element.finished = !element.finished;
+        })
+    }
+
+    function getFilterData() {
+        if (filter == 'All') return missionData
+        else if (filter == 'Active') {
+             return missionData.filter(element => element.finished == false)
+        }
+        else if (filter == 'Completed') {
+            return missionData.filter(element => element.finished == true)
+        }
+    }
+
 
     return (
         <View>
             <FlatList
-                style={styles.container}
-                data={dataArray}
-                renderItem={({ item }) => <Task id={item.id} text={item.text} />}
+                data={getFilterData()}
+                renderItem={({ item }) => <Task id={item.id} text={item.text} finished={item.finished} updateFinishedStatus={handlePress} />}
             />
         </View>
     )
-
 }
 export default TaskList;
 
-const styles = StyleSheet.create({
-    container: {
-       
-    }
-
-});

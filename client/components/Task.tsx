@@ -5,27 +5,31 @@ import BouncyCheckbox from "react-native-bouncy-checkbox";
 interface Types {
     id: number,
     text: string,
+    finished: boolean,
+    updateFinishedStatus: any,
 }
 
-const Task = ({ id, text }: Types) => {
+const Task = ({ id, text, finished, updateFinishedStatus }: Types) => {
     let bouncyCheckboxRef: BouncyCheckbox | null = null;
-    const [checked, setChecked] = React.useState(false);
+    const [checked, setChecked] = React.useState(finished);
 
+    console.log(id + ' is', finished)
     const taskPressed = () => {
         setChecked(!checked)
         bouncyCheckboxRef?.onPress()
+        updateFinishedStatus(id)
     }
 
     return (
         <TouchableWithoutFeedback onPress={taskPressed}>
-            <View style={styles.container} >
+            <View style={[styles.button, checked ? styles.inactive: styles.active]} >
                 <BouncyCheckbox
                     ref={(ref: any) => (bouncyCheckboxRef = ref)}
                     isChecked={checked}
                     fillColor="blue"
                     iconStyle={{ borderColor: 'gray' }}
                 />
-                <Text>{text}</Text>
+                <Text style={checked ? styles.inactive: styles.active}>{text}</Text>
             </View>
         </TouchableWithoutFeedback>
     )
@@ -36,23 +40,33 @@ const Task = ({ id, text }: Types) => {
 export default Task;
 
 const styles = StyleSheet.create({
-    container: {
+    active: {
+
+        backgroundColor: 'white',
+
+    
+    },
+    inactive: {
+        textDecorationLine: 'line-through',
+        backgroundColor: 'lightgray',
+    },
+
+    button:{
         width: (Dimensions.get('window').width) - 20,
 
         display: 'flex',
         flexDirection: 'row',
         alignItems: 'center',
-        backgroundColor: '#FFF',
-
-        borderColor: '#808080',
-        borderRadius: 7,
-        color: '#808080',
 
         height: 50,
         marginVertical: 5,
         borderWidth: 1,
+
         padding: 5,
 
-    },
+        borderColor: '#808080',
+        borderRadius: 7,
 
+    },
+   
 })
