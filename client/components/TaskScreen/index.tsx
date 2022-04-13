@@ -9,18 +9,23 @@ const TaskScreen = () => {
     const imagePath =  '../../assets/SpaceBackground.jpg';
 
     const [filter, setFiter] = React.useState('All')
+    const [searchText, setSearchText] = React.useState('')
 
     const onFilterChanged = (filterName) => {
         setFiter(filterName)
     }
+    
+    const onSearchText = (text) => {
+        setSearchText(text)
+    }
 
     return (
-        <ImageBackground source={require('../../assets/SpaceBackground.jpg')} resizeMode="cover" style={styles.image}>
+        <ImageBackground source={require(imagePath)} resizeMode="cover" style={styles.image}>
             <SafeAreaView style={styles.container}>
                 <Text style={styles.header}>Missions</Text>
-                <SearchBar />
+                <SearchBar onInput={onSearchText}/>
                 <TaskFilters filter={filter} onFilterChanged={onFilterChanged} />
-                <TaskList filter={filter}/>
+                <TaskList filter={filter} searchText={searchText}/>
             </SafeAreaView>
 
         </ImageBackground>

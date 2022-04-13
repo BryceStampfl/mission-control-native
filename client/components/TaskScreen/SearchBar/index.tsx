@@ -1,23 +1,20 @@
 import React, { useState } from 'react';
 import { View, TextInput, StyleSheet } from 'react-native';
 
-const SearchBar = () => {
-    const [text, setText] = useState('')
-
+const SearchBar = ({ onInput }) => {
 
     return (
         <View style={styles.container}>
             <TextInput
                 style={styles.text}
-                onChangeText={input => setText(input)}
-                placeholder='Search'                
+                onChangeText={onInput}
+                placeholder='Search'
             >
             </TextInput>
         </View>
     )
 
 }
-
 export default SearchBar
 
 const styles = StyleSheet.create({
@@ -28,7 +25,7 @@ const styles = StyleSheet.create({
         backgroundColor: '#FFF',
         borderColor: '#808080',
         borderRadius: 7,
-        color: '#808080',
+        color: 'black',
         height: 40,
         margin: 12,
         borderWidth: 1,
