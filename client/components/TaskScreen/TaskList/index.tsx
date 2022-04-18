@@ -6,7 +6,7 @@ import {missionData}  from 'utils/Data';
 
 
 
-const TaskList = ({ filter }) => {
+const TaskList = ({ filter, searchText }) => {
 
     const handlePress = (id: number) => {
         missionData.map((element) => {
@@ -15,13 +15,21 @@ const TaskList = ({ filter }) => {
     }
 
     function getFilterData() {
-        if (filter == 'All') return missionData
+        let dataArray = missionData;
+        
+        if (searchText == null || searchText != ''){
+            dataArray = dataArray.filter(element => element.text.includes(searchText))
+        }
+
+        if (filter == 'All') return dataArray
         else if (filter == 'Active') {
-             return missionData.filter(element => element.finished == false)
+             dataArray = dataArray.filter(element => element.finished == false)
         }
         else if (filter == 'Completed') {
-            return missionData.filter(element => element.finished == true)
+            dataArray = dataArray.filter(element => element.finished == true)
         }
+
+        return dataArray;
     }
 
 
