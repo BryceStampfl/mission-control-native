@@ -5,6 +5,8 @@ import TaskList from './TaskList/index';
 import TaskFilters from './TaskFilters/index'
 import { SafeAreaView } from 'react-native-safe-area-context';
 
+import BackgroundWallpaper from 'components/Background';
+
 const TaskScreen = () => {
     const imagePath =  '../../assets/SpaceBackground.jpg';
 
@@ -20,15 +22,12 @@ const TaskScreen = () => {
     }
 
     return (
-        <ImageBackground source={require(imagePath)} resizeMode="cover" style={styles.image}>
             <SafeAreaView style={styles.container}>
                 <Text style={styles.header}>Missions</Text>
                 <SearchBar onInput={onSearchText}/>
                 <TaskFilters filter={filter} onFilterChanged={onFilterChanged} />
                 <TaskList filter={filter} searchText={searchText}/>
             </SafeAreaView>
-
-        </ImageBackground>
     )
 }
 
