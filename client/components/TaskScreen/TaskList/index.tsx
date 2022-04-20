@@ -1,7 +1,7 @@
 import React from 'react';
 import { FlatList, View } from 'react-native'
 import Task from './Task';
-
+import { useBottomTabBarHeight } from '@react-navigation/bottom-tabs'
 import {missionData}  from 'utils/Data';
 
 
@@ -32,9 +32,11 @@ const TaskList = ({ filter, searchText }) => {
         return dataArray;
     }
 
+    const bottomTabHeight = useBottomTabBarHeight();
+
 
     return (
-        <View>
+        <View style={{marginBottom: useBottomTabBarHeight() + 45}}>
             <FlatList
                 data={getFilterData()}
                 renderItem={({ item }) => <Task id={item.id} text={item.text} finished={item.finished} updateFinishedStatus={handlePress} />}
@@ -43,4 +45,3 @@ const TaskList = ({ filter, searchText }) => {
     )
 }
 export default TaskList;
-
