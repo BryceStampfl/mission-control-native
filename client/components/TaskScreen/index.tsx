@@ -5,10 +5,8 @@ import TaskList from './TaskList/index';
 import TaskFilters from './TaskFilters/index'
 import { SafeAreaView } from 'react-native-safe-area-context';
 
-import BackgroundWallpaper from 'components/Background';
 
 const TaskScreen = () => {
-    const imagePath =  '../../assets/SpaceBackground.jpg';
 
     const [filter, setFiter] = React.useState('All')
     const [searchText, setSearchText] = React.useState('')
@@ -38,19 +36,10 @@ const styles = StyleSheet.create({
     container: {
         flex: 1,
         alignItems: 'center',
-        paddingTop: 20,
-
     },
     header: {
         fontSize: 40,
         color: '#FFFFFF',
         alignSelf: 'center',
-
     },
-    image: {
-        width: '100%',
-        height: '100%',
-        flex: 1,
-    }
-
 });
