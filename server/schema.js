@@ -2,11 +2,12 @@ const { gql } = require("apollo-server");
 
 const typeDefs = gql`
 
+
 type User {
   id: ID!
-  name: String
+  email: String!
   tasks: [Task]
-
+  token: String
 }
 
 type Task {
@@ -21,14 +22,17 @@ type Task {
 
 type Query {
   tasks: [Task]
-  user(id: String!): User
+  user(email: String!): User
 }
 
-# Mutation return time reccomended defining special obj
+# Mutation return time recommended defining special obj
 type Mutation{
-    addTask(content: String): Task
-    deleteTask(id: ID!): Task
+  
+  createUser(email: String): User
+  login(email: String): User
+  addTask(content: String): Task
+  deleteTask(id: ID!): Task
 }
 `;
 
-module.exports= typeDefs
+module.exports = typeDefs;
