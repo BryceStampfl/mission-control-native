@@ -1,5 +1,6 @@
 const sqlite3 = require('sqlite3')
 
+
 let db = new sqlite3.Database("./database.sqlite3", (err) => { 
     if (err) { 
         console.log('Error when creating the database', err) 
