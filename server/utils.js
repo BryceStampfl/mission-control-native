@@ -2,14 +2,17 @@ const SQL = require('sequelize');
 
 
 module.exports.createStore = () => {
- 
-//const db2 = new SQL('sqlite::memory:') // Example for sqlite
+
+  //const db2 = new SQL('sqlite::memory:') // Example for sqlite
 
 
-const db = new SQL({
-  dialect: 'sqlite',
-  storage: './datasources/database.sqlite3'
-});
+  const db = new SQL({
+    dialect: 'sqlite',
+    storage: './datasources/database.sqlite3',
+    define: {
+      timestamps: false
+    }
+  });
 
   const users = db.define('users', {
     id: {
@@ -17,12 +20,23 @@ const db = new SQL({
       primaryKey: true,
       autoIncrement: true,
     },
-    // createdAt: SQL.DATE,
-    // updatedAt: SQL.DATE,
     email: SQL.STRING,
   });
 
-  return { users };
+  const tasks = db.define('tasks', {
+    id: {
+      type: SQL.INTEGER,
+      primaryKey: true,
+      autoIncrement: true,
+    },
+    content: SQL.STRING,
+    userId: {
+      type: SQL.INTEGER,
+      foreignKey: true,
+    },
+  })
+
+  return { users, tasks };
 };
 
 

@@ -1,5 +1,3 @@
-
-
 // Resolvers signature fieldName: (parent, args, context, info) => data;
 // parent: Return value of the resolver for this fields parent(the resolvers for a parent field always executes first)
 // args: This object contains all GraphQL arguments
@@ -9,17 +7,22 @@
 
 // Resolvers return either Data ofrequired type,
 // or A promise that fulfills with data of the required type
+
 module.exports = {
   Query: {
-    user: (_, __, { dataSources }) => dataSources.userApi.createUser(),
+    getUserById: async (_, { id }, { dataSources }) => {
+      const result = await dataSources.sqlApi.retrieveUser(id);
+      return result;
+    },
+    getTasksById: async (_, { id }, { dataSources }) => {
+      const result = await dataSources.sqlApi.retrieveTasks(id);
+      return result;
+    },
   },
   Mutation: {
     createUser: async (_, { email }, { dataSources }) => {
-      const user = await dataSources.userApi.createUser({email});
-      console.log("\nUser found is \n" + user)
+      const user = await dataSources.sqlApi.createUser({ email });
       return user;
-  }
-
+    }
   },
-
 };

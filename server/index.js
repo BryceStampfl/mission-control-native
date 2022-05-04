@@ -1,24 +1,27 @@
+require('dotenv').config();
 const { ApolloServer } = require("apollo-server");
-const typeDefs = require("./schema");
 const { createStore } = require("./utils");
+const typeDefs = require("./schema");
 const resolvers = require("./resolvers")
 
-const UserAPI = require("./datasources/user");
 
+const SqlApi = require("./datasources/sqlApi");
+
+//Setups the SQLite database
 const store = createStore();
 
-const server = new ApolloServer({ 
-    typeDefs,
-    resolvers,
-    dataSources: () => {
-        userApi: new UserAPI({store})
-    }
- });
+const server = new ApolloServer({
+  typeDefs,
+  resolvers,
+  dataSources: () => ({
+    sqlApi: new SqlApi({ store }),
+  })
+});
 
 
 server.listen().then(() => {
 
-    console.log(`
+  console.log(`
   
       Server is running!
   
@@ -27,5 +30,5 @@ server.listen().then(() => {
       Explore at https://studio.apollographql.com/sandbox
   
     `);
-  
-  });
+
+});

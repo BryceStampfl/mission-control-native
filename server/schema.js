@@ -7,31 +7,25 @@ type User {
   id: ID!
   email: String!
   tasks: [Task]
-  token: String
 }
 
 type Task {
     id: ID!
     content: String
-    user: User
+    userId: ID!
 }
 
 # The "Query" type is special: it lists all of the available queries that
-
 # clients can execute, along with the return type for each. In this
 
 type Query {
-  tasks: [Task]
-  user(email: String!): User
+  getUserById(id: ID): User
+  getTasksById(id: ID): [Task]
 }
 
-# Mutation return time recommended defining special obj
+# Mutation return type recommended defining special obj
 type Mutation{
-  
   createUser(email: String): User
-  login(email: String): User
-  addTask(content: String): Task
-  deleteTask(id: ID!): Task
 }
 `;
 
