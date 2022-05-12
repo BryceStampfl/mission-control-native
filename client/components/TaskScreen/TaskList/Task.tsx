@@ -5,12 +5,12 @@ import BouncyCheckbox from "react-native-bouncy-checkbox";
 
 interface Types {
     id: number,
-    text: string,
+    content: string,
     finished: boolean,
     updateFinishedStatus: any,
 }
 
-const Task = ({ id, text, finished, updateFinishedStatus }: Types) => {
+const Task = ({ id, content, finished, updateFinishedStatus }: Types) => {
     let bouncyCheckboxRef: BouncyCheckbox | null = null;
     const [checked, setChecked] = React.useState(finished);
 
@@ -22,19 +22,18 @@ const Task = ({ id, text, finished, updateFinishedStatus }: Types) => {
 
     return (
         <TouchableWithoutFeedback onPress={taskPressed}>
-            <View style={[styles.button, checked ? styles.inactive: styles.active]} >
+            <View style={[styles.button, checked ? styles.inactive: styles.active]}>
                 <BouncyCheckbox
                     ref={(ref: any) => (bouncyCheckboxRef = ref)}
                     isChecked={checked}
                     fillColor="blue"
                     iconStyle={{ borderColor: 'gray' }}
                 />
-                <Text style={checked ? styles.inactive: styles.active}>{text}</Text>
+                <Text style={checked ? styles.inactive: styles.active}>{content}</Text>
             </View>
         </TouchableWithoutFeedback>
     )
 };
-
 
 
 export default Task;

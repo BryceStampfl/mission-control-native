@@ -1,9 +1,11 @@
 import React from 'react';
-import { ImageBackground, Text, StyleSheet } from 'react-native';
+import { Text, StyleSheet } from 'react-native';
 import SearchBar from './SearchBar/index';
 import TaskList from './TaskList/index';
 import TaskFilters from './TaskFilters/index'
 import { SafeAreaView } from 'react-native-safe-area-context';
+import AddTask from './AddTask';
+
 
 
 const TaskScreen = () => {
@@ -14,18 +16,18 @@ const TaskScreen = () => {
     const onFilterChanged = (filterName) => {
         setFiter(filterName)
     }
-    
+
     const onSearchText = (text) => {
         setSearchText(text)
     }
-
     return (
-            <SafeAreaView style={styles.container}>
-                <Text style={styles.header}>Missions</Text>
-                <SearchBar onInput={onSearchText}/>
-                <TaskFilters filter={filter} onFilterChanged={onFilterChanged} />
-                <TaskList filter={filter} searchText={searchText}/>
-            </SafeAreaView>
+        <SafeAreaView style={styles.container}>
+            <Text style={styles.header}>Missions</Text>
+            <SearchBar onInput={onSearchText} />
+            <AddTask />
+            <TaskFilters filter={filter} onFilterChanged={onFilterChanged} />
+            <TaskList filter={filter} searchText={searchText} />
+        </SafeAreaView>
     )
 }
 

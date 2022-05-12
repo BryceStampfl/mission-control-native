@@ -1,45 +1,76 @@
 import React from 'react';
-import { FlatList, View } from 'react-native'
-import Task from './Task';
+import { FlatList, View, Text, Button } from 'react-native'
 import { useBottomTabBarHeight } from '@react-navigation/bottom-tabs'
-import {missionData}  from 'utils/Data';
+import Task from './Task';
 
+import { useQuery } from '@apollo/client';
+import { GET_TASKS } from 'utils/graphQlCalls';
 
 
 const TaskList = ({ filter, searchText }) => {
 
-    const handlePress = (id: number) => {
-        missionData.map((element) => {
-            if (element.id == id) element.finished = !element.finished;
+    const { loading, error, data } = useQuery(GET_TASKS, {
+        onCompleted: (data) => setWriteableData(data["getTasksById"]),
+        variables: { userId: 1 }
+    })
+
+    const [missionData, setMissionData] = React.useState([]);
+
+
+    const setWriteableData = (data) => {
+        let readableArray = []
+        data.map(obj => {
+            let newObj = {}
+            for (let i = 1; i < Object.keys(obj).length; i++) {
+                    newObj[Object.keys(obj)[i]] = Object.values(obj)[i]
+            }
+            readableArray.push(newObj);
         })
+        setMissionData(readableArray)
     }
 
-    function getFilterData() {
-        let dataArray = missionData;
-        
-        if (searchText == null || searchText != ''){
-            dataArray = dataArray.filter(element => element.text.includes(searchText))
+    const handlePress = (id: number) => {
+        let tempArray = [...missionData]
+        let index = tempArray.findIndex(item => item.id == id );
+        let tempElement = {...tempArray[index]}
+
+        tempElement.finished = !(tempElement.finished)
+        tempArray[index] = tempElement;
+        setMissionData(tempArray);
+    }
+
+    const getFilterData = () => {
+        let filteredArray = missionData;
+
+        if (searchText == null || searchText != '') {
+            filteredArray = missionData.filter(element => element.content.includes(searchText))
         }
 
-        if (filter == 'All') return dataArray
+        if (filter == 'All') return filteredArray
         else if (filter == 'Active') {
-             dataArray = dataArray.filter(element => element.finished == false)
+            filteredArray = missionData.filter(element => element.finished == false)
+
         }
         else if (filter == 'Completed') {
-            dataArray = dataArray.filter(element => element.finished == true)
+            filteredArray = missionData.filter(element => element.finished == true)
         }
-
-        return dataArray;
+        return filteredArray;
     }
-
-    const bottomTabHeight = useBottomTabBarHeight();
-
+    
+    if(loading) return <Text>Loading</Text>
 
     return (
-        <View style={{marginBottom: useBottomTabBarHeight() + 45}}>
+        <View style={{ marginBottom: useBottomTabBarHeight() + 45 }}>
             <FlatList
+                keyExtractor={(item) => item.id.toString()}
                 data={getFilterData()}
-                renderItem={({ item }) => <Task id={item.id} text={item.text} finished={item.finished} updateFinishedStatus={handlePress} />}
+                renderItem={({ item }) =>
+                    <Task
+                        id={item.id}
+                        content={item.content}
+                        finished={item.finished}
+                        updateFinishedStatus={handlePress}
+                    />}
             />
         </View>
     )
