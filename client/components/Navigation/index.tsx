@@ -12,7 +12,7 @@ const Navigation = () => {
     const imagePath =  '../../assets/SpaceBackground.jpg';
 
     return (
-        <ImageBackground source={require(imagePath)} resizeMode="cover" style={styles.image}>
+        <ImageBackground source={require('../../assets/SpaceBackground.jpg')} resizeMode="cover" style={styles.image}>
             <NavigationContainer theme={navTheme}>
                 <Tab.Navigator
                     screenOptions={({ route }) => ({

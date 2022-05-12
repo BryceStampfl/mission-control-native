@@ -3,9 +3,11 @@ import React from 'react';
 import { StyleSheet, View, Dimensions, FlatList } from 'react-native';
 import Filter from './Filter';
 
-import { filterData } from 'utils/Data.js';
+//import { filterData } from 'utils/Data.js';
 
 const TaskFilters = ({ filter, onFilterChanged }) => {
+
+    const filterData = [{title: 'All'}, {title: 'Active'}, {title: 'Completed'}];
 
     return (
         <View style={styles.container}>

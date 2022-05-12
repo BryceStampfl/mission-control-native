@@ -1,10 +1,6 @@
-const SQL = require('sequelize');
+import { Sequelize as SQL }  from 'sequelize';
 
-
-module.exports.createStore = () => {
-
-  //const db2 = new SQL('sqlite::memory:') // Example for sqlite
-
+export const createStore = () => {
 
   const db = new SQL({
     dialect: 'sqlite',
@@ -34,6 +30,10 @@ module.exports.createStore = () => {
       type: SQL.INTEGER,
       foreignKey: true,
     },
+    finished: {
+      type: SQL.BOOLEAN,
+      defaultValue: false,
+    }
   })
 
   return { users, tasks };

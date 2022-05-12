@@ -1,8 +1,6 @@
-const { gql } = require("apollo-server");
+import { gql } from 'apollo-server'
 
-const typeDefs = gql`
-
-
+export const typeDefs = gql`
 type User {
   id: ID!
   email: String!
@@ -11,22 +9,21 @@ type User {
 
 type Task {
     id: ID!
-    content: String
+    content: String!
     userId: ID!
+    finished: Boolean
 }
-
-# The "Query" type is special: it lists all of the available queries that
-# clients can execute, along with the return type for each. In this
 
 type Query {
   getUserById(id: ID): User
   getTasksById(id: ID): [Task]
+  getStatus: String
+
 }
 
 # Mutation return type recommended defining special obj
 type Mutation{
   createUser(email: String): User
+  createTask(userId: ID!, content: String!): Task
 }
 `;
-
-module.exports = typeDefs;
