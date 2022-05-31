@@ -3,7 +3,7 @@ import { FlatList, StyleSheet, View } from 'react-native';
 import ScreenWrapper from 'components/shared/ScreenWrapper';
 import Header from 'components/shared/Header';
 import CalendarDay from './CalendarDay';
-
+import OptionBar from './OptionBar';
 
 function initializeWeeklyData() {
 
@@ -17,17 +17,15 @@ function initializeWeeklyData() {
             dayNumber: mondayDateNumber + i,
         })
     }
-    console.log("dataArray is", dataArray)
     return dataArray
 }
-
-
 
 
 const WorkScheduleScreen = () => {
     return (
         <ScreenWrapper>
-            <Header title={"Calendar"} />
+            <Header title={"Work Schedule"} />
+            <OptionBar />
             <FlatList
                 data={initializeWeeklyData()}
                 renderItem={({ item }) =>
@@ -43,10 +41,6 @@ export default WorkScheduleScreen;
 
 
 const dayOfWeek = ['Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat', 'Sun']
-
-
-
-
 
 const styles = StyleSheet.create({
 

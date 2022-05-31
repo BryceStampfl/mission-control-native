@@ -1,14 +1,16 @@
 import React from 'react'
-import { View, Text, StyleSheet, FlatList } from 'react-native'
-
+import { View, Text, StyleSheet } from 'react-native'
+import { ListItemStyle } from 'utils/styles/ListItemStyles'
 
 const CalendarDay = ({nameOfDay, dayNumber}) => {
-    console.log("Name of day is ",nameOfDay )
     return (
-        <View style={styles.component}>
-            <View>
+        <View style={ListItemStyle.basic}>
+            <View style={styles.vertical}>
                 <Text>
-                    {nameOfDay} {dayNumber}
+                    {nameOfDay}
+                </Text>
+                <Text>
+                    {dayNumber}
                 </Text>
             </View>
         </View>
@@ -18,21 +20,7 @@ export default CalendarDay
 
 
 const styles = StyleSheet.create({
-    component: {
-        flex: 1,
-        backgroundColor: 'white',
-        color: 'white',
-
-        flexDirection: 'row',
-        alignItems: 'center',
-
-        height: 50,
-        marginVertical: 5,
-        borderWidth: 1,
-
-        padding: 5,
-        
-        borderColor: '#808080',
-        borderRadius: 7,
+    vertical: {
+       flexDirection: 'column'
     },
 })
