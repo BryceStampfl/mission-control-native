@@ -1,21 +1,27 @@
 import React from 'react'
 import { View, FlatList, Text, StyleSheet, Button } from 'react-native'
 
-const CustomTimePicker = ({ closeModal }) => {
-    let hourList = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12];
+import TimeList from './TimeList';
 
-    const renderItem = ({ item }) => (
-        <Text style={styles.textStyle}>
-            {item}
-        </Text>
-    )
+const CustomTimePicker = ({ closeModal }) => {
+
+    let hourList = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12];
+    let minuteList = ["00","15","30","45"];
+    let evening = ["AM", "PM"];
+    
+    
+    const updateCalendarDay = () => {
+        
+    }
+   
 
     return (
         <View style={[styles.modalContainer]}>
+
             <View style={styles.modalView}>
                 <View style={styles.header}>
                     <Text style={styles.textStyle}>Time</Text>
-                    <Button 
+                    <Button
                         title={"X"}
                         onPress={closeModal}
                     />
@@ -26,26 +32,16 @@ const CustomTimePicker = ({ closeModal }) => {
                 })}</Text>
 
                 <View style={styles.container}>
-                    <FlatList
-                        scrollEnabled={false}
-                        style={styles.container2}
-                        data={hourList}
-                        renderItem={renderItem}
-                    />
-                    <FlatList
-                        scrollEnabled={false}
-                        style={styles.container2}
-                        data={['00', '15', '30', '45']}
-                        renderItem={renderItem}
-                    />
-                    <FlatList
-                        scrollEnabled={false}
-                        style={styles.container2}
-                        data={['AM', 'PM']}
-                        renderItem={renderItem}
-                    />
+                    <TimeList list={hourList} />
+                    <TimeList list={minuteList} />
+                    <TimeList list={evening} />
                 </View>
+                <Button
+                title='Submit'
+                onPress={closeModal}
+                />
             </View>
+
         </View>
     )
 }
@@ -62,6 +58,10 @@ const styles = StyleSheet.create({
         alignItems: 'center',
 
     },
+    cancelButton: {
+        justifyContent: 'flex-end'
+    },
+
     textStyle: {
         fontSize: 30,
         textAlign: 'center'

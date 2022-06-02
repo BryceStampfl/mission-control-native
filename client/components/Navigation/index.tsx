@@ -24,8 +24,8 @@ const Navigation = () => {
 
                             switch(route.name) {
                                 case 'Home' : iconName = 'planet-outline'; break
-                                case 'TaskScreen': iconName = 'list-outline'; break
-                                case 'WorkScheduleScreen': iconName ='calendar-outline'; break
+                                case 'Tasks': iconName = 'list-outline'; break
+                                case 'Work Schedule': iconName ='calendar-outline'; break
                             }
                             
                            
@@ -36,8 +36,8 @@ const Navigation = () => {
                     })}
                 >
                     <Tab.Screen name="Home" component={HomeScreen} options={{ headerShown: false, }} />
-                    <Tab.Screen name="TaskScreen" component={TaskScreen} options={{ headerShown: false }} />
-                    <Tab.Screen name="WorkScheduleScreen" component={WorkScheduleScreen} options={{ headerShown: false }} />
+                    <Tab.Screen name="Tasks" component={TaskScreen} options={{ headerShown: false }} />
+                    <Tab.Screen name="Work Schedule" component={WorkScheduleScreen} options={{ headerShown: false }} />
 
                 </Tab.Navigator>
             </NavigationContainer>

@@ -3,7 +3,7 @@ import { View, Text, Button } from 'react-native'
 import { ListItemStyle } from 'utils/styles/ListItemStyles';
 
 import { Alert, Modal, Pressable } from "react-native";
-import CustomTimePicker from './CustomTimePicker';
+import CustomTimePicker from './ModalTimePicker/CustomTimePicker';
 
 
 const OptionBar = () => {
@@ -36,10 +36,7 @@ const OptionBar = () => {
             >
                 <Text>Show Modal</Text>
             </Pressable>
-
-
         </View>
-
     )
 }
 export default OptionBar

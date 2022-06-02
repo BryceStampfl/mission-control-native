@@ -25,7 +25,6 @@ const WorkScheduleScreen = () => {
     return (
         <ScreenWrapper>
             <Header title={"Work Schedule"} />
-            <OptionBar />
             <FlatList
                 data={initializeWeeklyData()}
                 renderItem={({ item }) =>
