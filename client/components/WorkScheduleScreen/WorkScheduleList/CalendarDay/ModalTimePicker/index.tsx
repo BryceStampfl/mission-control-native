@@ -1,10 +1,20 @@
 import React from 'react'
-import { View, Text, StyleSheet, Button } from 'react-native'
-
+import { View, Button, StyleSheet } from 'react-native'
+import TabHeader from './ModalTabHeader';
 import TimeList from './TimeList';
-import TabHeader from './TabHeader';
 
-const CustomTimePicker = ({ closeModal, updateModalTime }) => {
+/**
+ * @param {function} closeModal - Closes the Modal and returns back to WorkScheduleList component
+ * @param {function} updateModalTime - Callback fn to CalendarDay to call updateWorkDaySchedule with the new
+ *         time schedule and also appends the day number to the returned object to updateWorkDaySchedule
+ */
+
+interface Types {
+    closeModal: any
+    updateModalTime: any
+}
+
+const ModalTimePicker = ({ closeModal, updateModalTime }: Types) => {
 
     const [selectedTab, setSelectedTab] = React.useState(0)
     const [data, setData] = React.useState({
@@ -19,6 +29,10 @@ const CustomTimePicker = ({ closeModal, updateModalTime }) => {
         closeModal()
     }
 
+    /**
+     * 
+     * @param timeData - New time schedule that is changed into an object with start{} and end{} properties within it
+     */
     const updateData = (timeData) => {
         let startTab = (selectedTab == 0 ? true : false)
         if (hourList.includes(timeData)) {
@@ -49,14 +63,14 @@ const CustomTimePicker = ({ closeModal, updateModalTime }) => {
                 </View>
 
                 <View style={[styles.modalContainer, (selectedTab == 1) ? styles.hide : null]}>
-                    <TimeList list={hourList.concat()} updateFn={updateData} />
-                    <TimeList list={minuteList} updateFn={updateData} />
-                    <TimeList list={periodList} updateFn={updateData} />
+                    <TimeList list={hourList.concat()} updateData={updateData} />
+                    <TimeList list={minuteList} updateData={updateData} />
+                    <TimeList list={periodList} updateData={updateData} />
                 </View>
                 <View style={[styles.modalContainer, (selectedTab == 0) ? styles.hide : null]}>
-                    <TimeList list={hourList} updateFn={updateData} />
-                    <TimeList list={minuteList} updateFn={updateData} />
-                    <TimeList list={periodList} updateFn={updateData} />
+                    <TimeList list={hourList} updateData={updateData} />
+                    <TimeList list={minuteList} updateData={updateData} />
+                    <TimeList list={periodList} updateData={updateData} />
                 </View>
                 <Button
                     title='Submit'
@@ -66,13 +80,15 @@ const CustomTimePicker = ({ closeModal, updateModalTime }) => {
         </View>
     )
 }
-export default CustomTimePicker
+export default ModalTimePicker;
 
 
 const hourList = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12];
 const minuteList = ["00", "15", "30", "45"];
 const periodList = ["AM", "PM"];
 
+
+//TODO Extract out modal properties for code reuse
 const styles = StyleSheet.create({
     hide: {
         display: 'none'
@@ -87,7 +103,6 @@ const styles = StyleSheet.create({
     modalContainer: {
         flexDirection: 'row',
         alignItems: 'center',
-
     },
     modalView: {
         margin: 20,

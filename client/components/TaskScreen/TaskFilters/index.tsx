@@ -1,11 +1,20 @@
 import React from 'react';
-import { StyleSheet, View, Dimensions, FlatList } from 'react-native';
+import { View, FlatList, StyleSheet } from 'react-native';
 import Filter from './Filter';
 
+/**
+ * @param {string} activeFilter - Currently selected Filter
+ * @param {function} setNewFilter - Callback to TaskScreen Component to update the new Filter if pressed in Filter Component
+ */
 
-const TaskFilters = ({ filter, onFilterChanged }) => {
+interface Types {
+    activeFilter: string
+    setNewFilter: any
+}
 
-    const filterData = [{ title: 'All' }, { title: 'Active' }, { title: 'Completed' }];
+const TaskFilters = ({ activeFilter, setNewFilter }: Types) => {
+
+    const filterData = [{ name: 'All' }, { name: 'Active' }, { name: 'Completed' }];
 
     return (
         <View style={styles.container}>
@@ -14,9 +23,9 @@ const TaskFilters = ({ filter, onFilterChanged }) => {
                 data={filterData}
                 renderItem={({ item }) => (
                     <Filter
-                        title={item.title}
-                        activeFilter={filter}
-                        onFilterPress={onFilterChanged}
+                        name={item.name}
+                        activeFilter={activeFilter}
+                        setNewFilter={setNewFilter}
                     />
                 )}
             />

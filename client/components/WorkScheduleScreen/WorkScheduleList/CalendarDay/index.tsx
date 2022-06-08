@@ -1,12 +1,31 @@
 import React from 'react'
 import { View, Text, StyleSheet } from 'react-native'
-import { ListItemStyle } from 'utils/styles/ListItemStyles'
-
 import { Alert, Modal, Pressable } from "react-native";
-import CustomTimePicker from './ModalTimePicker/CustomTimePicker';
+import { ListItemStyle } from 'utils/styles/ListItemStyles'
+import ModalTimePicker from './ModalTimePicker';
+
+/**
+ * @param {string} nameOfDay - Name of day ~ Mon, Tue, Wed, ect
+ * @param {number} dayNumber - Number corresponding to what day it is
+ * @param {string} timeStart - Starting time for workday, format is strings: HH, MM, period
+ * @param {string} timeEnd - Ending time for workday
+ * @param {string} period - Whether or not the time specified is AM or PM
+ * @param {function} updateWorkDaySchedule - Callback fn to WorkScheduleList to update workData array
+ */
 
 
-const CalendarDay = ({ props, updateWorkDay }) => {
+interface Types {
+    props: {
+        nameOfDay: string
+        dayNumber: number
+        timeStart: string
+        timeEnd: string
+        period: string
+    }
+    updateWorkDaySchedule: any
+}
+
+const CalendarDay = ({ props, updateWorkDaySchedule }: Types) => {
     const [modalVisible, setModalVisible] = React.useState(false);
 
     const closeModal = () => {
@@ -14,7 +33,7 @@ const CalendarDay = ({ props, updateWorkDay }) => {
     }
 
     const updatedModalTime = (time) => {
-        updateWorkDay(time, props.dayNumber)
+        updateWorkDaySchedule(time, props.dayNumber)
     }
 
     return (
@@ -29,13 +48,14 @@ const CalendarDay = ({ props, updateWorkDay }) => {
                         setModalVisible(!modalVisible);
                     }}
                 >
-                    <CustomTimePicker
+                    <ModalTimePicker
                         closeModal={closeModal}
                         updateModalTime={updatedModalTime}
                     />
                 </Modal>
 
                 <View style={styles.container}>
+
                     <View style={styles.vertical}>
                         <Text>
                             {props.nameOfDay}
@@ -76,5 +96,4 @@ const styles = StyleSheet.create({
         alignItems: 'center',
         height: '100%',
     },
-    
 })

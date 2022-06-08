@@ -5,6 +5,8 @@ import { POST_TASK } from 'utils/graphQlCalls'
 
 import { ListItemStyle } from 'utils/styles/ListItemStyles';
 
+// TODO: Make into a modal #29
+
 const AddTask = () => {
 
     const [text, onChangeText] = React.useState('')

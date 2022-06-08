@@ -1,7 +1,17 @@
 import React from 'react'
-import { View, StyleSheet, Text } from 'react-native'
+import { View, Text, StyleSheet } from 'react-native'
 
-const TabHeader = ({ selectedTab, onTabPressed }) => {
+/**
+ * @param {number} selectedTab - A number either 0 or 1 denoting the startTab(0) or the endTab(1) 
+ * @param {function} onTabPressed - Callback fn to ModalTimePicker Component to change the tabs
+ */
+
+interface Types {
+    selectedTab: number
+    onTabPressed: any
+}
+
+const ModalTabHeader = ({ selectedTab, onTabPressed }: Types) => {
 
     return (
         <View style={styles.tabContainer}>
@@ -16,7 +26,7 @@ const TabHeader = ({ selectedTab, onTabPressed }) => {
         </View>
     )
 }
-export default TabHeader
+export default ModalTabHeader
 
 const styles = StyleSheet.create({
     tabContainer: {

@@ -1,12 +1,24 @@
 import React from 'react'
-import { TouchableNativeFeedback, View, Text, StyleSheet, Dimensions } from 'react-native'
+import { View, Text, TouchableNativeFeedback, StyleSheet, Dimensions } from 'react-native'
 
-const Filter = ({ title, activeFilter, onFilterPress }) => {
+/**
+ * @param {string} name - Name of filter - All, Active, or Completed
+ * @param {string} activeFilter - Current filter being applied
+ * @param {function} setNewFilter - Callback to TaskScreen Component to update the new Filter if pressed in Filter Component
+ */
+
+interface Types {
+    name: string
+    activeFilter: string
+    setNewFilter: any
+}
+
+const Filter = ({ name, activeFilter, setNewFilter }: Types) => {
 
     return (
-        <TouchableNativeFeedback onPress={() => onFilterPress(title)}>
-            <View style={[styles.button, activeFilter == title ? styles.active : styles.inactive]}>
-                <Text style={styles.alignCenter}>{title}</Text>
+        <TouchableNativeFeedback onPress={() => setNewFilter(name)}>
+            <View style={[styles.button, activeFilter == name ? styles.active : styles.inactive]}>
+                <Text style={styles.alignCenter}>{name}</Text>
             </View>
         </TouchableNativeFeedback>)
 }

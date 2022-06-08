@@ -1,5 +1,4 @@
 import React from 'react';
-
 import ScreenWrapper from 'components/shared/ScreenWrapper';
 import Header from 'components/shared/Header';
 import SearchBar from './SearchBar/index';
@@ -9,22 +8,22 @@ import TaskList from './TaskList/index';
 
 const TaskScreen = () => {
 
-    const [filter, setFiter] = React.useState('All')
+    const [filter, setFilter] = React.useState('All')
     const [searchText, setSearchText] = React.useState('')
 
-    const onFilterChanged = (filterName) => {
-        setFiter(filterName)
+    const setNewFilter = (filterName) => {
+        setFilter(filterName)
     }
 
-    const onSearchText = (text) => {
+    const onSearchInput = (text) => {
         setSearchText(text)
     }
 
     return (
         <ScreenWrapper>
             <Header title={"Missions"} />
-            <SearchBar onInput={onSearchText} />
-            <TaskFilters filter={filter} onFilterChanged={onFilterChanged} />
+            <SearchBar onSearchInput={onSearchInput} />
+            <TaskFilters activeFilter={filter} setNewFilter={setNewFilter} />
             <TaskList filter={filter} searchText={searchText} />
         </ScreenWrapper>
     )

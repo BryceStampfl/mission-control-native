@@ -2,10 +2,20 @@ import React from 'react';
 import { View, Text, Button, StyleSheet } from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
 
-const HomeScreen = ({ navigation }) => {
+/**
+ * @param {object} navigation - Navigation object for React-Navigation with many properties
+ */
+
+interface Types {
+    navigation: {
+        navigate: any
+    }
+}
+
+const HomeScreen = ({ navigation }: Types) => {
     return (
-        <SafeAreaView id="homescreen" style={styles.container}>
-            <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center' }}>
+        <SafeAreaView style={styles.container}>
+            <View style={styles.viewContainer}>
                 <Text>Home Screen</Text>
                 <Button
                     title="Go to TaskScreen"
@@ -22,5 +32,10 @@ const styles = StyleSheet.create({
         flex: 1,
         alignItems: 'center',
         paddingTop: 20,
+    },
+    viewContainer: {
+        flex: 1,
+        alignItems: 'center',
+        justifyContent: 'center'
     }
 });
