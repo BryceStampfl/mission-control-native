@@ -20,7 +20,6 @@ const CustomTimePicker = ({ closeModal, updateModalTime }) => {
     }
 
     const updateData = (timeData) => {
-        console.log("data is ", timeData)
         let startTab = (selectedTab == 0 ? true : false)
         if (hourList.includes(timeData)) {
             if (startTab) { setData({ ...data, start: { ...data.start, hour: timeData } }) }
@@ -35,10 +34,6 @@ const CustomTimePicker = ({ closeModal, updateModalTime }) => {
             else { setData({ ...data, end: { ...data.end, period: timeData } }) }
         }
     }
-
-    // React.useEffect (() => {
-    //     console.log("Time data is ", data)
-    // })
 
     return (
         <View style={[styles.modalWrapper]}>

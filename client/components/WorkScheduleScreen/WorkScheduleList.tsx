@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { View, FlatList } from 'react-native'
 import CalendarDay from './CalendarDay';
 
@@ -15,8 +15,13 @@ const WorkScheduleList = () => {
         tempElement.timeEnd = newTimes.end.hour + ":" + newTimes.end.minute + ' ' + newTimes.end.period;
         tempArray[index] = tempElement;
 
-        setWorkData([...workData, tempArray]);
+        setWorkData([...workData])
     }
+
+    useEffect(() => {
+        console.log("Data is now", workData)
+        console.log("********************************888")
+    })
 
     return (
         <View>
@@ -44,8 +49,8 @@ function initializeWeeklyData() {
         dataArray.push({
             nameOfDay: dayOfWeek[i],
             dayNumber: mondayDateNumber + i,
-            timeStart: (new Date().getHours()),
-            timeEnd: new Date().getMinutes()
+            timeStart: '',
+            timeEnd: ''
         })
     }
     return dataArray
