@@ -19,7 +19,7 @@ const CalendarDay = ({ props, updateWorkDay }) => {
 
     return (
         <Pressable onLongPress={() => setModalVisible(true)} >
-            <View style={ListItemStyle.basic}>
+            <View style={ListItemStyle.basicMedium}>
                 <Modal
                     animationType="slide"
                     transparent={true}
@@ -75,6 +75,6 @@ const styles = StyleSheet.create({
         justifyContent: 'center',
         alignItems: 'center',
         height: '100%',
-        
-    }
+    },
+    
 })

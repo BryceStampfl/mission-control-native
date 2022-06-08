@@ -1,4 +1,3 @@
-import React from 'react'
 import { PixelRatio } from 'react-native'
 
 export const pixelListItemSmall = PixelRatio.get()*20;

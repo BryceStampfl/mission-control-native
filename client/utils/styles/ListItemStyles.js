@@ -1,25 +1,34 @@
 
 import { StyleSheet } from 'react-native'
-import { pixelListItemSmall } from 'utils/styles'
+import { pixelListItemMedium, pixelListItemSmall } from 'utils/styles'
+
+const basic =({
+   //Color
+   backgroundColor: 'white',
+
+   //Spacing
+   marginVertical: 5,
+   padding: 5,
+
+   //Borders
+   borderColor: '#808080',
+   borderWidth: 1,
+   borderRadius: 7,
+})
 
 export const ListItemStyle = StyleSheet.create({
-    basic: {
-        //Color
-        backgroundColor: 'white',
+    basicSmall: {
+        ...basic,
 
         //Height
         height: pixelListItemSmall,
 
-        //Spacing
-
-        marginVertical: 5,
-        padding: 5,
-
-        //Borders
-        borderColor: '#808080',
-        borderWidth: 1,
-        borderRadius: 7,
     },
-    
+    basicMedium: {
+        ...basic,
+
+        //Height
+        height: pixelListItemMedium,
+    },
 })
 
