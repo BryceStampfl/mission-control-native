@@ -34,7 +34,10 @@ const Task = ({ id, content, finished, updateFinishedStatus }: Types) => {
                     ref={(ref: any) => (bouncyCheckboxRef = ref)}
                     isChecked={checked}
                     fillColor="blue"
-                    iconStyle={{ borderColor: 'gray' }}
+                    iconStyle={{ borderColor: 'gray', borderRadius: 0 }}
+                    disableBuiltInState={true}
+                    onPress={() => taskPressed}
+                    
                 />
                 <Text style={checked ? styles.inactive : styles.active}>{content}</Text>
             </View>
