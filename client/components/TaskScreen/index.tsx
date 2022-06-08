@@ -3,7 +3,6 @@ import React from 'react';
 import ScreenWrapper from 'components/shared/ScreenWrapper';
 import Header from 'components/shared/Header';
 import SearchBar from './SearchBar/index';
-import AddTask from './AddTask';
 import TaskFilters from './TaskFilters/index'
 import TaskList from './TaskList/index';
 
@@ -25,7 +24,6 @@ const TaskScreen = () => {
         <ScreenWrapper>
             <Header title={"Missions"} />
             <SearchBar onInput={onSearchText} />
-            <AddTask />
             <TaskFilters filter={filter} onFilterChanged={onFilterChanged} />
             <TaskList filter={filter} searchText={searchText} />
         </ScreenWrapper>

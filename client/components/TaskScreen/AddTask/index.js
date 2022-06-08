@@ -1,10 +1,12 @@
-import React, { useEffect } from 'react';
+import React from 'react';
 import { View, TextInput, Button, StyleSheet } from 'react-native';
 import { useMutation } from '@apollo/client';
-import { GET_TASKS, POST_TASK } from 'utils/graphQlCalls'
+import { POST_TASK } from 'utils/graphQlCalls'
 
+import { ListItemStyle } from 'utils/styles/ListItemStyles';
 
 const AddTask = () => {
+
     const [text, onChangeText] = React.useState('')
     const [postTask, { loading, error }] = useMutation(POST_TASK)
 
@@ -13,7 +15,7 @@ const AddTask = () => {
     }
 
     return (
-        <View style={styles.container}>
+        <View style={[styles.container]}>
             <TextInput style={styles.text}
                 value={text}
                 onChangeText={onChangeText}
