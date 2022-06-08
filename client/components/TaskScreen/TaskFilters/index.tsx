@@ -1,13 +1,11 @@
 import React from 'react';
-
 import { StyleSheet, View, Dimensions, FlatList } from 'react-native';
 import Filter from './Filter';
 
-//import { filterData } from 'utils/Data.js';
 
 const TaskFilters = ({ filter, onFilterChanged }) => {
 
-    const filterData = [{title: 'All'}, {title: 'Active'}, {title: 'Completed'}];
+    const filterData = [{ title: 'All' }, { title: 'Active' }, { title: 'Completed' }];
 
     return (
         <View style={styles.container}>
@@ -22,20 +20,23 @@ const TaskFilters = ({ filter, onFilterChanged }) => {
                     />
                 )}
             />
-        </View>)
+        </View>
+    )
 }
 export default TaskFilters
 
-
-
 const styles = StyleSheet.create({
     container: {
-        width: (Dimensions.get('window').width) - 20,
+        //Height
         height: 40,
+
+        //Color
         backgroundColor: 'lightgray',
 
+        //Margin
         marginBottom: 5,
 
+        //Border
         borderRadius: 7,
         borderWidth: 1,
     },

@@ -1,11 +1,10 @@
 import React from 'react';
-import { Text, StyleSheet } from 'react-native';
-import SearchBar from './SearchBar/index';
-import TaskList from './TaskList/index';
-import TaskFilters from './TaskFilters/index'
-import { SafeAreaView } from 'react-native-safe-area-context';
-import AddTask from './AddTask';
 
+import ScreenWrapper from 'components/shared/ScreenWrapper';
+import Header from 'components/shared/Header';
+import SearchBar from './SearchBar/index';
+import TaskFilters from './TaskFilters/index'
+import TaskList from './TaskList/index';
 
 
 const TaskScreen = () => {
@@ -20,28 +19,14 @@ const TaskScreen = () => {
     const onSearchText = (text) => {
         setSearchText(text)
     }
+
     return (
-        <SafeAreaView style={styles.container}>
-            <Text style={styles.header}>Missions</Text>
+        <ScreenWrapper>
+            <Header title={"Missions"} />
             <SearchBar onInput={onSearchText} />
-            <AddTask />
             <TaskFilters filter={filter} onFilterChanged={onFilterChanged} />
             <TaskList filter={filter} searchText={searchText} />
-        </SafeAreaView>
+        </ScreenWrapper>
     )
 }
-
 export default TaskScreen;
-
-
-const styles = StyleSheet.create({
-    container: {
-        flex: 1,
-        alignItems: 'center',
-    },
-    header: {
-        fontSize: 40,
-        color: '#FFFFFF',
-        alignSelf: 'center',
-    },
-});

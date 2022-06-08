@@ -1,34 +1,28 @@
-import React, { useState } from 'react';
+import React from 'react';
 import { View, TextInput, StyleSheet } from 'react-native';
+import { ListItemStyle } from 'utils/styles/ListItemStyles';
+
 
 const SearchBar = ({ onInput }) => {
-
     return (
-        <View style={styles.container}>
+        <View>
             <TextInput
-                style={styles.text}
+                style={[ListItemStyle.basicMedium, styles.searchContainer]}
                 onChangeText={onInput}
                 placeholder='Search'
+                placeholderTextColor={'#000'}
             >
             </TextInput>
         </View>
     )
-
 }
 export default SearchBar
 
 const styles = StyleSheet.create({
-    container: {
-        alignSelf: 'stretch',
-    },
-    text: {
-        backgroundColor: '#FFF',
-        borderColor: '#808080',
-        borderRadius: 7,
-        color: 'black',
+    searchContainer: {
+        //Height
         height: 40,
-        margin: 12,
-        borderWidth: 1,
-        padding: 10,
+        //Spacing
+        paddingLeft: 10,
     }
 });

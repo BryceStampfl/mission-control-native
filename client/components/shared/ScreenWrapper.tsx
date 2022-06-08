@@ -15,5 +15,6 @@ export default ScreenWrapper;
 const styles = StyleSheet.create({
     container: {
         marginHorizontal: 10,
+        marginTop: 5,
     }
 });
