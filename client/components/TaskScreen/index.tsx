@@ -5,7 +5,8 @@ import TaskList from './TaskList/index';
 import TaskFilters from './TaskFilters/index'
 import { SafeAreaView } from 'react-native-safe-area-context';
 import AddTask from './AddTask';
-
+import Header from 'components/shared/Header';
+import ScreenWrapper from 'components/shared/ScreenWrapper';
 
 
 const TaskScreen = () => {
@@ -21,13 +22,13 @@ const TaskScreen = () => {
         setSearchText(text)
     }
     return (
-        <SafeAreaView style={styles.container}>
-            <Text style={styles.header}>Missions</Text>
+        <ScreenWrapper>
+            <Header title={"Missions"} />
             <SearchBar onInput={onSearchText} />
             <AddTask />
             <TaskFilters filter={filter} onFilterChanged={onFilterChanged} />
             <TaskList filter={filter} searchText={searchText} />
-        </SafeAreaView>
+        </ScreenWrapper>
     )
 }
 
