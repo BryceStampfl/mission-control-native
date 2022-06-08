@@ -6,17 +6,16 @@ import { Alert, Modal, Pressable } from "react-native";
 import CustomTimePicker from './ModalTimePicker/CustomTimePicker';
 
 
-const CalendarDay = ({ nameOfDay, dayNumber }) => {
-    const [date, setDate] = React.useState(new Date())
-    const [open, setOpen] = React.useState(false)
-    
+const CalendarDay = ({props , updateWorkDay}) => {
     const [modalVisible, setModalVisible] = React.useState(false);
-
 
     const closeModal = () => {
         setModalVisible(false)
     }
 
+    const updatedModalTime = (time) => {
+        updateWorkDay(time, props.dayNumber)
+    }
 
     return (
         <Pressable onLongPress={() => setModalVisible(true)} >
@@ -30,15 +29,23 @@ const CalendarDay = ({ nameOfDay, dayNumber }) => {
                         setModalVisible(!modalVisible);
                     }}
                 >
-                    <CustomTimePicker closeModal={closeModal} />
+                    <CustomTimePicker 
+                    closeModal={closeModal}
+                    updateModalTime={updatedModalTime}
+                    />
                 </Modal>
 
                 <View style={styles.vertical}>
                     <Text>
-                        {nameOfDay}
+                        {props.nameOfDay}
                     </Text>
                     <Text>
-                        {dayNumber}
+                        {props.dayNumber}
+                    </Text>
+                </View>
+                <View>
+                    <Text>
+                        {props.timeStart} - {props.timeEnd}
                     </Text>
                 </View>
                 <View>
@@ -49,7 +56,6 @@ const CalendarDay = ({ nameOfDay, dayNumber }) => {
     )
 }
 export default CalendarDay
-
 
 const styles = StyleSheet.create({
     vertical: {

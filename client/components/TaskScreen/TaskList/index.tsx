@@ -8,6 +8,7 @@ import { GET_TASKS } from 'utils/graphQlCalls';
 
 
 const TaskList = ({ filter, searchText }) => {
+    const [requery, setRequery] = React.useState('')
 
     const { loading, error, data } = useQuery(GET_TASKS, {
         onCompleted: (data) => setWriteableData(data["getTasksById"]),
