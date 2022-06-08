@@ -37,7 +37,6 @@ const Task = ({ id, content, finished, updateFinishedStatus }: Types) => {
                     iconStyle={{ borderColor: 'gray', borderRadius: 0 }}
                     disableBuiltInState={true}
                     onPress={() => taskPressed}
-                    
                 />
                 <Text style={checked ? styles.inactive : styles.active}>{content}</Text>
             </View>
