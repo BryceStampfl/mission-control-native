@@ -3,6 +3,7 @@ import { Text, View, StyleSheet, TouchableWithoutFeedback } from 'react-native';
 import { ListItemStyle } from 'utils/styles/ListItemStyles'
 import BouncyCheckbox from "react-native-bouncy-checkbox";
 
+
 interface Types {
     id: number,
     content: string,

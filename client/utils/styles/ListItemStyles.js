@@ -1,8 +1,12 @@
 
-import { StyleSheet } from 'react-native'
-import { pixelListItemMedium, pixelListItemSmall, pixelListItemExtraSmall } from 'utils/styles'
-
+import { StyleSheet, PixelRatio } from 'react-native'
 import {defaultBackgroundColor, defaultSpacing, defaultBorder} from './styles'
+
+// Basic styles for the ListItem components that are frequently sharing styling
+
+const pixelListItemExtraSmall = PixelRatio.get() * 17;
+const pixelListItemSmall = PixelRatio.get() * 20;
+const pixelListItemMedium = PixelRatio.get() * 25;
 
 const basicStyle =({
    //Color
@@ -32,4 +36,5 @@ export const ListItemStyle = StyleSheet.create({
         height: pixelListItemMedium,
     },
 })
+
 

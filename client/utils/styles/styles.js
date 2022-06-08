@@ -1,3 +1,4 @@
+
 export const defaultBorder = ({
     borderWidth: 1,
     borderRadius: 7,
@@ -12,3 +13,5 @@ export const defaultSpacing = ({
 export const defaultBackgroundColor = ({
     backgroundColor: '#FFF'
 })
+
+
