@@ -1,7 +1,7 @@
 import React from 'react';
-import { Text, View, StyleSheet, Dimensions, TouchableWithoutFeedback } from 'react-native';
+import { Text, View, StyleSheet, TouchableWithoutFeedback } from 'react-native';
+import { ListItemStyle } from 'utils/styles/ListItemStyles'
 import BouncyCheckbox from "react-native-bouncy-checkbox";
-
 
 interface Types {
     id: number,
@@ -22,7 +22,7 @@ const Task = ({ id, content, finished, updateFinishedStatus }: Types) => {
 
     return (
         <TouchableWithoutFeedback onPress={taskPressed}>
-            <View style={[styles.button, checked ? styles.inactive: styles.active]}>
+            <View style={[ListItemStyle.basicExtraSmall ,styles.flexRowAlignCenter, checked ? styles.inactive: styles.active]}>
                 <BouncyCheckbox
                     ref={(ref: any) => (bouncyCheckboxRef = ref)}
                     isChecked={checked}
@@ -33,9 +33,7 @@ const Task = ({ id, content, finished, updateFinishedStatus }: Types) => {
             </View>
         </TouchableWithoutFeedback>
     )
-};
-
-
+}
 export default Task;
 
 const styles = StyleSheet.create({
@@ -46,21 +44,8 @@ const styles = StyleSheet.create({
         textDecorationLine: 'line-through',
         backgroundColor: 'lightgray',
     },
-    button:{
-        
-        width: (Dimensions.get('window').width) - 20,
-
+    flexRowAlignCenter:{
         flexDirection: 'row',
         alignItems: 'center',
-
-        height: 50,
-        marginVertical: 5,
-        borderWidth: 1,
-
-        padding: 5,
-        
-        borderColor: '#808080',
-        borderRadius: 7,
     },
-   
 })

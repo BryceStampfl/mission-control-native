@@ -1,6 +1,6 @@
 
 import { StyleSheet } from 'react-native'
-import { pixelListItemMedium, pixelListItemSmall } from 'utils/styles'
+import { pixelListItemMedium, pixelListItemSmall, pixelListItemExtraSmall } from 'utils/styles'
 
 const basic =({
    //Color
@@ -17,6 +17,13 @@ const basic =({
 })
 
 export const ListItemStyle = StyleSheet.create({
+    basicExtraSmall: {
+        ...basic,
+
+        //Height
+        height: pixelListItemExtraSmall,
+
+    },
     basicSmall: {
         ...basic,
 
