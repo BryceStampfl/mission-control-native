@@ -1,11 +1,14 @@
 
 import React from 'react';
+import {View} from 'react-native'
+import SafeAreaView from 'react-native-safe-area-context'
 import { NavigationContainer, DefaultTheme } from '@react-navigation/native';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import { ImageBackground, StyleSheet } from 'react-native';
 import Ionicons from '@expo/vector-icons/Ionicons';
 import HomeScreen from '../HomeScreen';
 import TaskScreen from '../TaskScreen';
+import WorkScheduleScreen from 'components/WorkScheduleScreen';
 
 
 const Navigation = () => {
@@ -19,11 +22,13 @@ const Navigation = () => {
                         tabBarIcon: ({ focused, color, size }) => {
                             let iconName;
 
-                            if (route.name === 'Home') {
-                                iconName = 'planet-outline'
-                            } else if (route.name === 'TaskScreen') {
-                                iconName = 'list-outline';
+                            switch(route.name) {
+                                case 'Home' : iconName = 'planet-outline'; break
+                                case 'Tasks': iconName = 'list-outline'; break
+                                case 'Work Schedule': iconName ='calendar-outline'; break
                             }
+                            
+                           
                             return <Ionicons name={iconName} size={size} color={color} />;
                         },
                         tabBarActiveTintColor: '#3AD2FF',
@@ -31,7 +36,9 @@ const Navigation = () => {
                     })}
                 >
                     <Tab.Screen name="Home" component={HomeScreen} options={{ headerShown: false, }} />
-                    <Tab.Screen name="TaskScreen" component={TaskScreen} options={{ headerShown: false }} />
+                    <Tab.Screen name="Tasks" component={TaskScreen} options={{ headerShown: false }} />
+                    <Tab.Screen name="Work Schedule" component={WorkScheduleScreen} options={{ headerShown: false }} />
+
                 </Tab.Navigator>
             </NavigationContainer>
         </ImageBackground>
