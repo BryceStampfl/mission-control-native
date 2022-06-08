@@ -1,17 +1,16 @@
 import React from 'react'
-import {TouchableNativeFeedback, View, Text, StyleSheet, Dimensions} from 'react-native'
+import { TouchableNativeFeedback, View, Text, StyleSheet, Dimensions } from 'react-native'
 
- const Filter = ({ title, activeFilter, onFilterPress }) => {
+const Filter = ({ title, activeFilter, onFilterPress }) => {
 
     return (
         <TouchableNativeFeedback onPress={() => onFilterPress(title)}>
             <View style={[styles.button, activeFilter == title ? styles.active : styles.inactive]}>
-                <Text style={styles.text}>{title}</Text>
+                <Text style={styles.alignCenter}>{title}</Text>
             </View>
         </TouchableNativeFeedback>)
 }
 export default Filter
-
 
 
 const styles = StyleSheet.create({
@@ -27,10 +26,8 @@ const styles = StyleSheet.create({
     button: {
         width: ((Dimensions.get('window').width) - 20) / 3,
         justifyContent: 'center',
-        padding: 2,
     },
-    text: {
+    alignCenter: {
         textAlign: 'center',
     },
-
 })
