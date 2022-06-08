@@ -2,39 +2,33 @@
 import { StyleSheet } from 'react-native'
 import { pixelListItemMedium, pixelListItemSmall, pixelListItemExtraSmall } from 'utils/styles'
 
-const basic =({
+import {defaultBackgroundColor, defaultSpacing, defaultBorder} from './styles'
+
+const basicStyle =({
    //Color
-   backgroundColor: 'white',
+   ...defaultBackgroundColor,
 
    //Spacing
-   marginVertical: 5,
-   padding: 5,
+   ...defaultSpacing,
 
    //Borders
-   borderColor: '#808080',
-   borderWidth: 1,
-   borderRadius: 7,
+   ...defaultBorder
 })
 
 export const ListItemStyle = StyleSheet.create({
+    basicStyle: {
+        ...basicStyle,
+    },
     basicExtraSmall: {
-        ...basic,
-
-        //Height
+        ...basicStyle,
         height: pixelListItemExtraSmall,
-
     },
     basicSmall: {
-        ...basic,
-
-        //Height
+        ...basicStyle,
         height: pixelListItemSmall,
-
     },
     basicMedium: {
-        ...basic,
-
-        //Height
+        ...basicStyle,
         height: pixelListItemMedium,
     },
 })
