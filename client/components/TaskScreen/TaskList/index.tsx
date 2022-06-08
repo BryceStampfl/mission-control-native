@@ -1,5 +1,5 @@
 import React from 'react';
-import { View, Text, FlatList } from 'react-native'
+import { View, FlatList, ActivityIndicator, StyleSheet } from 'react-native'
 import { useBottomTabBarHeight } from '@react-navigation/bottom-tabs'
 import Task from './Task';
 
@@ -25,7 +25,6 @@ const TaskList = ({ filter, searchText }: Types) => {
     })
 
     const [missionData, setMissionData] = React.useState([]);
-
 
     /**
      * 
@@ -82,7 +81,17 @@ const TaskList = ({ filter, searchText }: Types) => {
         return filteredArray;
     }
 
-    if (loading) return <Text>Loading</Text>
+    if (loading) {
+        return (
+            <View style={{ height: '70%' }}>
+                <ActivityIndicator
+                    style={{ flex: 1 }}
+                    size={'large'}
+                    color={'#FFFFF'}
+                />
+            </View>
+        )
+    }
 
     return (
         <View style={{ marginBottom: useBottomTabBarHeight() + 45 }}>
