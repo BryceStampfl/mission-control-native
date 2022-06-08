@@ -1,7 +1,5 @@
 
 import React from 'react';
-import {View} from 'react-native'
-import SafeAreaView from 'react-native-safe-area-context'
 import { NavigationContainer, DefaultTheme } from '@react-navigation/native';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import { ImageBackground, StyleSheet } from 'react-native';
@@ -10,9 +8,8 @@ import HomeScreen from '../HomeScreen';
 import TaskScreen from '../TaskScreen';
 import WorkScheduleScreen from 'components/WorkScheduleScreen';
 
-
 const Navigation = () => {
-    const imagePath =  '../../assets/SpaceBackground.jpg';
+    const imagePath = '../../assets/SpaceBackground.jpg';
 
     return (
         <ImageBackground source={require('../../assets/SpaceBackground.jpg')} resizeMode="cover" style={styles.image}>
@@ -22,13 +19,11 @@ const Navigation = () => {
                         tabBarIcon: ({ focused, color, size }) => {
                             let iconName;
 
-                            switch(route.name) {
-                                case 'Home' : iconName = 'planet-outline'; break
+                            switch (route.name) {
+                                case 'Home': iconName = 'planet-outline'; break
                                 case 'Tasks': iconName = 'list-outline'; break
-                                case 'Work Schedule': iconName ='calendar-outline'; break
+                                case 'Work Schedule': iconName = 'calendar-outline'; break
                             }
-                            
-                           
                             return <Ionicons name={iconName} size={size} color={color} />;
                         },
                         tabBarActiveTintColor: '#3AD2FF',

@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import React from 'react';
 import { View, FlatList } from 'react-native'
 import CalendarDay from './CalendarDay';
 
@@ -6,22 +6,20 @@ import CalendarDay from './CalendarDay';
 const WorkScheduleList = () => {
     const [workData, setWorkData] = React.useState(initializeWeeklyData());
 
-    const updateWorkDay = (newTimes, dayNumber) => {
+    /**
+     * @param newTimes - Object containing new start/end times for a specific work day
+     * @param dayNumber - Day of the month identifier for the to be updated array element
+     */
+    const updateWorkDaySchedule = (newTimes, dayNumber) => {
         let tempArray = workData;
         let index = tempArray.findIndex(item => item.dayNumber == dayNumber)
         let tempElement = { ...tempArray[index] }
-
+        
         tempElement.timeStart = newTimes.start.hour + ":" + newTimes.start.minute + ' ' + newTimes.start.period;
         tempElement.timeEnd = newTimes.end.hour + ":" + newTimes.end.minute + ' ' + newTimes.end.period;
         tempArray[index] = tempElement;
-
         setWorkData([...workData])
     }
-
-    useEffect(() => {
-        console.log("Data is now", workData)
-        console.log("********************************888")
-    })
 
     return (
         <View>
@@ -30,7 +28,7 @@ const WorkScheduleList = () => {
                 renderItem={({ item }) =>
                     <CalendarDay
                         props={item}
-                        updateWorkDay={updateWorkDay}
+                        updateWorkDaySchedule={updateWorkDaySchedule}
                     />}
             />
         </View>
@@ -38,6 +36,8 @@ const WorkScheduleList = () => {
 }
 export default WorkScheduleList;
 
+
+// TODO: Delete when data is pulled from backend database
 function initializeWeeklyData() {
     let dayOfWeek = ['Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat', 'Sun']
 
@@ -50,7 +50,8 @@ function initializeWeeklyData() {
             nameOfDay: dayOfWeek[i],
             dayNumber: mondayDateNumber + i,
             timeStart: '',
-            timeEnd: ''
+            timeEnd: '',
+            period: 'AM'
         })
     }
     return dataArray

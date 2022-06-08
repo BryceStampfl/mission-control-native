@@ -1,14 +1,20 @@
 import React from 'react';
-import { Text, View, StyleSheet, TouchableWithoutFeedback } from 'react-native';
+import { View, Text, TouchableWithoutFeedback, StyleSheet } from 'react-native';
 import { ListItemStyle } from 'utils/styles/ListItemStyles'
 import BouncyCheckbox from "react-native-bouncy-checkbox";
 
+/**
+ * @param {number} id - Task ID
+ * @param {string} content - Summary of task
+ * @param {boolean} finished - Boolean if task is completed to it can be styled differently
+ * @param {function} updateFinishedStatus - Callback fn to TaskList to update finished if a task was pressed
+ */
 
 interface Types {
-    id: number,
-    content: string,
-    finished: boolean,
-    updateFinishedStatus: any,
+    id: number
+    content: string
+    finished: boolean
+    updateFinishedStatus: any
 }
 
 const Task = ({ id, content, finished, updateFinishedStatus }: Types) => {
@@ -23,14 +29,14 @@ const Task = ({ id, content, finished, updateFinishedStatus }: Types) => {
 
     return (
         <TouchableWithoutFeedback onPress={taskPressed}>
-            <View style={[ListItemStyle.basicExtraSmall ,styles.flexRowAlignCenter, checked ? styles.inactive: styles.active]}>
+            <View style={[ListItemStyle.basicExtraSmall, styles.flexRowAlignCenter, checked ? styles.inactive : styles.active]}>
                 <BouncyCheckbox
                     ref={(ref: any) => (bouncyCheckboxRef = ref)}
                     isChecked={checked}
                     fillColor="blue"
                     iconStyle={{ borderColor: 'gray' }}
                 />
-                <Text style={checked ? styles.inactive: styles.active}>{content}</Text>
+                <Text style={checked ? styles.inactive : styles.active}>{content}</Text>
             </View>
         </TouchableWithoutFeedback>
     )
@@ -45,7 +51,7 @@ const styles = StyleSheet.create({
         textDecorationLine: 'line-through',
         backgroundColor: 'lightgray',
     },
-    flexRowAlignCenter:{
+    flexRowAlignCenter: {
         flexDirection: 'row',
         alignItems: 'center',
     },

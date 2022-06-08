@@ -9,6 +9,7 @@ npm-debug.*
 *.mobileprovision
 *.orig.*
 web-build/
-
+server/datasources/createSQLiteDb.js
+server/datasources/database.sqlite3
 # macOS
 .DS_Store

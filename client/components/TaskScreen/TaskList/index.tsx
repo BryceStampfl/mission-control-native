@@ -1,13 +1,22 @@
 import React from 'react';
-import { FlatList, View, Text, Button } from 'react-native'
+import { View, Text, FlatList } from 'react-native'
 import { useBottomTabBarHeight } from '@react-navigation/bottom-tabs'
 import Task from './Task';
 
 import { useQuery } from '@apollo/client';
 import { GET_TASKS } from 'utils/graphQlCalls';
 
+/**
+ * @param {string} filter - Currentl filter being applied
+ * @param {string} searchText - Text currently being searched
+ */
 
-const TaskList = ({ filter, searchText }) => {
+interface Types {
+    filter: string
+    searchText: string
+}
+
+const TaskList = ({ filter, searchText }: Types) => {
     const [requery, setRequery] = React.useState('')
 
     const { loading, error, data } = useQuery(GET_TASKS, {
@@ -18,28 +27,43 @@ const TaskList = ({ filter, searchText }) => {
     const [missionData, setMissionData] = React.useState([]);
 
 
+    /**
+     * 
+     * @param data 
+     * @returns JSON from GraphQL query changed into array of Task objects 
+     */
     const setWriteableData = (data) => {
         let readableArray = []
         data.map(obj => {
             let newObj = {}
             for (let i = 1; i < Object.keys(obj).length; i++) {
-                    newObj[Object.keys(obj)[i]] = Object.values(obj)[i]
+                newObj[Object.keys(obj)[i]] = Object.values(obj)[i]
             }
             readableArray.push(newObj);
         })
         setMissionData(readableArray)
     }
 
+
+    /**
+     * @param id 
+     * @returns Array updated with Task pressed to change finished value
+     */
     const handlePress = (id: number) => {
         let tempArray = [...missionData]
-        let index = tempArray.findIndex(item => item.id == id );
-        let tempElement = {...tempArray[index]}
+        let index = tempArray.findIndex(item => item.id == id);
+        let tempElement = { ...tempArray[index] }
 
         tempElement.finished = !(tempElement.finished)
         tempArray[index] = tempElement;
         setMissionData(tempArray);
     }
 
+
+    /**
+     * 
+     * @returns array filtered by current filter and searchtext
+     */
     const getFilterData = () => {
         let filteredArray = missionData;
 
@@ -57,8 +81,8 @@ const TaskList = ({ filter, searchText }) => {
         }
         return filteredArray;
     }
-    
-    if(loading) return <Text>Loading</Text>
+
+    if (loading) return <Text>Loading</Text>
 
     return (
         <View style={{ marginBottom: useBottomTabBarHeight() + 45 }}>

@@ -3,12 +3,20 @@ import { View, TextInput, StyleSheet } from 'react-native';
 import { ListItemStyle } from 'utils/styles/ListItemStyles';
 
 
-const SearchBar = ({ onInput }) => {
+/**
+ * @param {function} onSearchInput - Callback fn to TaskScreen Component to update searchText 
+ */
+
+interface Types {
+    onSearchInput: any
+}
+
+const SearchBar = ({ onSearchInput }: Types) => {
     return (
         <View>
             <TextInput
                 style={[ListItemStyle.basicMedium, styles.searchContainer]}
-                onChangeText={onInput}
+                onChangeText={onSearchInput}
                 placeholder='Search'
                 placeholderTextColor={'#000'}
             >
