@@ -1,50 +1,62 @@
 import React from 'react';
-import { View, TextInput, Button, StyleSheet } from 'react-native';
+import { View, Text, StyleSheet, Alert, Modal, Pressable } from 'react-native';
+
 import { useMutation } from '@apollo/client';
 import { POST_TASK } from 'utils/graphQlCalls'
 
 import { ListItemStyle } from 'utils/styles/ListItemStyles';
+import ModalAddTask from './ModalAddTask';
 
 // TODO: Make into a modal #29
 
 const AddTask = () => {
 
-    const [text, onChangeText] = React.useState('')
     const [postTask, { loading, error }] = useMutation(POST_TASK)
 
-    const onPress = () => {
-        postTask({ variables: { userId: 1, content: text } })
+    const [modalVisible, setModalVisible] = React.useState(false);
+
+    const closeModal = () => {
+        setModalVisible(false)
+    }
+
+    const updateAddTask = (newTask) => {
+        postTask({ variables: { userId: 1, content: newTask } })
     }
 
     return (
-        <View style={[styles.container]}>
-            <TextInput style={styles.text}
-                value={text}
-                onChangeText={onChangeText}
-            />
-            <Button
-                title="Submit"
-                onPress={onPress}
-            />
-        </View>
+        <Pressable onPress={() => setModalVisible(true)} >
+            {/* <View> */}
+            < View style={[styles.container, ListItemStyle.basicStyle]} >
+                <Modal
+                    animationType="slide"
+                    transparent={true}
+                    visible={modalVisible}
+                    onRequestClose={() => {
+                        Alert.alert("Modal has been closed.");
+                        setModalVisible(!modalVisible);
+                    }}
+                >
+                    <ModalAddTask
+                        closeModal={closeModal}
+                        updateFn={updateAddTask}
+                    />
+                </Modal>
+                <View >
+                    <Text style={styles.text}>+</Text>
+                </View>
+            </View >
+        </Pressable >
     )
 }
 export default AddTask
 
 const styles = StyleSheet.create({
     container: {
-        backgroundColor: '#FFF',
-        flexDirection: 'row',
-        alignSelf: 'stretch',
+        flexGrow: 1,
+        justifyContent: 'center',
+        width: 50,
     },
     text: {
-        backgroundColor: '#FFF',
-        borderColor: '#808080',
-        borderRadius: 7,
-        color: 'black',
-        height: 40,
-        margin: 12,
-        borderWidth: 1,
-        padding: 10,
+        textAlign: 'center'
     }
 });
