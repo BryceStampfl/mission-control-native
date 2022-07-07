@@ -13,9 +13,10 @@ interface Types {
 
 const SearchBar = ({ onSearchInput }: Types) => {
     return (
-        <View>
+        <View
+            style={[ListItemStyle.basicMedium, styles.searchContainer]}
+        >
             <TextInput
-                style={[ListItemStyle.basicMedium, styles.searchContainer]}
                 onChangeText={onSearchInput}
                 placeholder='Search'
                 placeholderTextColor={'#000'}
@@ -29,6 +30,7 @@ export default SearchBar
 const styles = StyleSheet.create({
     searchContainer: {
         //Height
+        flexGrow: 1,
         height: 40,
         //Spacing
         paddingLeft: 10,

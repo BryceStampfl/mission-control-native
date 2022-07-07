@@ -4,7 +4,7 @@ import Header from 'components/shared/Header';
 import SearchBar from './SearchBar/index';
 import TaskFilters from './TaskFilters/index'
 import TaskList from './TaskList/index';
-
+import OptionsBar from './OptionsBar';
 
 const TaskScreen = () => {
 
@@ -22,7 +22,7 @@ const TaskScreen = () => {
     return (
         <ScreenWrapper>
             <Header title={"Missions"} />
-            <SearchBar onSearchInput={onSearchInput} />
+            <OptionsBar onSearchInput={onSearchInput} />
             <TaskFilters activeFilter={filter} setNewFilter={setNewFilter} />
             <TaskList filter={filter} searchText={searchText} />
         </ScreenWrapper>
