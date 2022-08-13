@@ -3,11 +3,13 @@ import { View, StyleSheet } from 'react-native'
 
 import AddTask from '../AddTask';
 import SearchBar from '../SearchBar';
-import { ListItemStyle } from 'utils/styles/ListItemStyles';
+import { ListItemStyle } from 'utils/styles/Style';
 
+interface Types{ 
+    onSearchInput: any
+}
 
-
-const OptionsBar = (onSearchInput) => {
+const OptionsBar = ({onSearchInput}: Types) => {
     return (
         <View style={[styles.container]}>
             <SearchBar onSearchInput={onSearchInput} />

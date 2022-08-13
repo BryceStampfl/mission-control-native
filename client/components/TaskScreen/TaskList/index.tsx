@@ -2,6 +2,7 @@ import React from 'react';
 import { View, FlatList, ActivityIndicator, StyleSheet } from 'react-native'
 import { useBottomTabBarHeight } from '@react-navigation/bottom-tabs'
 import Task from './Task';
+import { graphQlToObjects } from 'utils/util';
 
 import { useQuery } from '@apollo/client';
 import { GET_TASKS } from 'utils/graphQlCalls';
@@ -17,32 +18,13 @@ interface Types {
 }
 
 const TaskList = ({ filter, searchText }: Types) => {
-    const [requery, setRequery] = React.useState('')
-
-    const { loading, error, data } = useQuery(GET_TASKS, {
-        onCompleted: (data) => setWriteableData(data["getTasksById"]),
-        variables: { userId: 1 }
-    })
 
     const [missionData, setMissionData] = React.useState([]);
 
-    /**
-     * 
-     * @param data 
-     * @returns JSON from GraphQL query changed into array of Task objects 
-     */
-    const setWriteableData = (data) => {
-        let readableArray = []
-        data.map(obj => {
-            let newObj = {}
-            for (let i = 1; i < Object.keys(obj).length; i++) {
-                newObj[Object.keys(obj)[i]] = Object.values(obj)[i]
-            }
-            readableArray.push(newObj);
-        })
-        setMissionData(readableArray)
-    }
-
+    const { loading, error, data } = useQuery(GET_TASKS, {
+        onCompleted: (data) => setMissionData(graphQlToObjects(data["getTasksById"])),
+        variables: { userId: 1 }
+    })
 
     /**
      * @param id 

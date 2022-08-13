@@ -4,7 +4,7 @@ import { View, Text, StyleSheet, Alert, Modal, Pressable } from 'react-native';
 import { useMutation } from '@apollo/client';
 import { POST_TASK } from 'utils/graphQlCalls'
 
-import { ListItemStyle } from 'utils/styles/ListItemStyles';
+import { Style } from 'utils/styles/Style';
 import ModalAddTask from './ModalAddTask';
 
 // TODO: Make into a modal #29
@@ -26,7 +26,7 @@ const AddTask = () => {
     return (
         <Pressable onPress={() => setModalVisible(true)} >
             {/* <View> */}
-            < View style={[styles.container, ListItemStyle.basicStyle]} >
+            < View style={[styles.container, Style.basic]} >
                 <Modal
                     animationType="slide"
                     transparent={true}

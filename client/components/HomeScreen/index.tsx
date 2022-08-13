@@ -1,6 +1,12 @@
 import React from 'react';
-import { View, Text, Button, StyleSheet } from 'react-native';
-import { SafeAreaView } from 'react-native-safe-area-context';
+import { View, StyleSheet } from 'react-native';
+import { screenHeight, bottomTabHeight } from 'utils/screenSize';
+
+import Header from 'components/shared/Header';
+import TasksInfoSquare from './InfoSquares/TasksInfoSquare';
+import ScreenWrapper from '../shared/ScreenWrapper'
+import WelcomeBanner from './WelcomeBanner';
+
 
 /**
  * @param {object} navigation - Navigation object for React-Navigation with many properties
@@ -14,28 +20,26 @@ interface Types {
 
 const HomeScreen = ({ navigation }: Types) => {
     return (
-        <SafeAreaView style={styles.container}>
-            <View style={styles.viewContainer}>
-                <Text>Home Screen</Text>
-                <Button
-                    title="Go to TaskScreen"
-                    onPress={() => navigation.navigate('TaskScreen')}
-                />
+        <ScreenWrapper >
+            <View >
+                <Header title={"Home"} />
+                <WelcomeBanner />
             </View>
-        </SafeAreaView>
+            <View style={styles.container} >
+                <TasksInfoSquare />
+                <TasksInfoSquare />
+                <TasksInfoSquare />
+                <TasksInfoSquare />
+            </View>
+        </ScreenWrapper>
     );
 }
 export default HomeScreen
 
 const styles = StyleSheet.create({
     container: {
-        flex: 1,
-        alignItems: 'center',
-        paddingTop: 20,
+        flexDirection: 'row',
+        flexWrap: 'wrap',
+        justifyContent: 'center',
     },
-    viewContainer: {
-        flex: 1,
-        alignItems: 'center',
-        justifyContent: 'center'
-    }
 });
