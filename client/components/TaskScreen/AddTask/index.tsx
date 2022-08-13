@@ -9,7 +9,7 @@ import ModalAddTask from './ModalAddTask';
 
 // TODO: Make into a modal #29
 
-const AddTask = () => {
+const AddTask = ({setNewTask}) => {
 
     const [postTask, { loading, error }] = useMutation(POST_TASK)
 
@@ -21,6 +21,7 @@ const AddTask = () => {
 
     const updateAddTask = (newTask) => {
         postTask({ variables: { userId: 1, content: newTask } })
+        setNewTask(newTask);
     }
 
     return (

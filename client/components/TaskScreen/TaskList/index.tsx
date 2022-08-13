@@ -15,9 +15,10 @@ import { GET_TASKS } from 'utils/graphQlCalls';
 interface Types {
     filter: string
     searchText: string
+    newTask: any
 }
 
-const TaskList = ({ filter, searchText }: Types) => {
+const TaskList = ({ filter, searchText, newTask }: Types) => {
 
     const [missionData, setMissionData] = React.useState([]);
 
@@ -25,6 +26,19 @@ const TaskList = ({ filter, searchText }: Types) => {
         onCompleted: (data) => setMissionData(graphQlToObjects(data["getTasksById"])),
         variables: { userId: 1 }
     })
+
+    /**
+    * @returns Array with newTask appended checking the last index
+    **/
+    if (missionData.length > 0 && missionData[missionData.length-1].content != newTask){
+            let array = [...missionData];
+            array.push({
+                id: eval((missionData[missionData.length-1].id) + 1),
+                content: newTask,
+                finished: false
+            })
+            setMissionData(array)
+    }
 
     /**
      * @param id 
