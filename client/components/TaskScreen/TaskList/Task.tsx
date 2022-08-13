@@ -1,6 +1,6 @@
 import React from 'react';
 import { View, Text, TouchableWithoutFeedback, StyleSheet } from 'react-native';
-import { ListItemStyle } from 'utils/styles/ListItemStyles'
+import { ListItemStyle } from 'utils/styles/Style'
 import BouncyCheckbox from "react-native-bouncy-checkbox";
 
 /**

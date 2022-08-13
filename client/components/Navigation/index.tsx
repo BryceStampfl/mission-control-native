@@ -16,6 +16,7 @@ const Navigation = () => {
             <NavigationContainer theme={navTheme}>
                 <Tab.Navigator
                     screenOptions={({ route }) => ({
+                        tabBarStyle: { height: 80},
                         tabBarIcon: ({ focused, color, size }) => {
                             let iconName;
 

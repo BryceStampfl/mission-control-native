@@ -1,7 +1,7 @@
 import React from 'react'
 import { View, Text, StyleSheet } from 'react-native'
 import { Alert, Modal, Pressable } from "react-native";
-import { ListItemStyle } from 'utils/styles/ListItemStyles'
+import { ListItemStyle } from 'utils/styles/Style'
 import ModalTimePicker from './ModalTimePicker';
 
 /**

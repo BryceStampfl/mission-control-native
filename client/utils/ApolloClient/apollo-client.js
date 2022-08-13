@@ -1,9 +1,8 @@
 import { ApolloClient, InMemoryCache, ApolloLink, HttpLink } from "@apollo/client";
 import { onError } from "@apollo/client/link/error";
-
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import { persistCache, AsyncStorageWrapper } from 'apollo3-cache-persist';
-
+import { ngrokIp } from "utils/environmental-variables";
 
 const errorLink = onError(({ graphQLErrors, networkError }) => {
     if (graphQLErrors)
@@ -15,7 +14,6 @@ const errorLink = onError(({ graphQLErrors, networkError }) => {
     if (networkError) console.log(`[Network error]: ${networkError}`);
 });
 
-let ngrokIp = "https://30af-2601-646-4202-1b20-2a33-74a3-4553-e16d.ngrok.io/graphql"
 
 const httpLink = new HttpLink({
     uri: ngrokIp,
