@@ -10,6 +10,7 @@ const TaskScreen = () => {
 
     const [filter, setFilter] = React.useState('All')
     const [searchText, setSearchText] = React.useState('')
+    const [newTask, setNewTask] = React.useState(false)
 
     const setNewFilter = (filterName) => {
         setFilter(filterName)
@@ -22,9 +23,9 @@ const TaskScreen = () => {
     return (
         <ScreenWrapper>
             <Header title={"Missions"} />
-            <OptionsBar onSearchInput={onSearchInput} />
+            <OptionsBar onSearchInput={onSearchInput} setNewTask={setNewTask}  />
             <TaskFilters activeFilter={filter} setNewFilter={setNewFilter} />
-            <TaskList filter={filter} searchText={searchText} />
+            <TaskList filter={filter} searchText={searchText} newTask={newTask} />
         </ScreenWrapper>
     )
 }
